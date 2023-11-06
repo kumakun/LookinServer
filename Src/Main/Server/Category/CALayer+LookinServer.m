@@ -77,6 +77,20 @@
     
     CGSize contextSize = self.frame.size;
     NSAssert(contextSize.width > 0 && contextSize.height > 0, @"");
+    
+    UIImage *image = nil;
+    UIGraphicsImageRendererFormat *format = [[UIGraphicsImageRendererFormat alloc] init];
+    format.scale = renderScale;
+    UIGraphicsImageRenderer *render = [[UIGraphicsImageRenderer alloc] initWithSize:contextSize format:format];
+    
+    image = [render imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
+        if (self.lks_hostView && !self.lks_hostView.lks_isChildrenViewOfTabBar) {
+            [self.lks_hostView.layer renderInContext:rendererContext.CGContext];
+        }else {
+            [self renderInContext:rendererContext.CGContext];
+        }
+    }];
+    /*
     UIGraphicsBeginImageContextWithOptions(contextSize, NO, renderScale);
     CGContextRef context = UIGraphicsGetCurrentContext();
     if (self.lks_hostView && !self.lks_hostView.lks_isChildrenViewOfTabBar) {
@@ -86,6 +100,8 @@
     }
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    */
+    
     return image;
 }
 

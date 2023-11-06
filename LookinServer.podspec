@@ -6,13 +6,13 @@ Pod::Spec.new do |spec|
   spec.homepage     = "https://lookin.work"
   spec.license      = "GPL-3.0"
   spec.author       = { "Li Kai" => "lookin@lookin.work" }
-  spec.ios.deployment_target  = "9.0"
-  spec.tvos.deployment_target  = '9.0'
+  spec.ios.deployment_target  = "10.0"
+  spec.tvos.deployment_target  = '10.0'
   spec.default_subspecs = 'Core'
   spec.source       = { :git => "https://github.com/QMUI/LookinServer.git", :tag => "1.2.4"}
   spec.framework  = "UIKit"
   spec.requires_arc = true
-    
+
   spec.subspec 'Core' do |ss|
     ss.source_files = ['Src/Main/**/*', 'Src/Base/**/*']
     ss.pod_target_xcconfig = {
@@ -36,7 +36,7 @@ Pod::Spec.new do |spec|
        'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) LOOKIN_SERVER_DISABLE_HOOK=1',
     }
   end
-  
+
   # CocoaPods 不支持多个 subspecs 和 configurations 并列
   # "pod 'LookinServer', :subspecs => ['Swift', 'NoHook'], :configurations => ['Debug']" is not supported by CocoaPods
   # https://github.com/QMUI/LookinServer/issues/134
